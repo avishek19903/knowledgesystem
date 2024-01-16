@@ -21,7 +21,7 @@ import {
   Stack,
   Divider,
 } from "@mantine/core";
-import { log } from "console";
+
 
 export default function Login(props: PaperProps) {
   const navigate = useNavigate();
