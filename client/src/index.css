@@ -5,9 +5,9 @@
 }
 
 body {
-  background-color: #382f2f;
+  /* background-color: #382f2f; */
 }
 
 /* @tailwind base; */
-@tailwind components;
+/* @tailwind components; */
 @tailwind utilities;

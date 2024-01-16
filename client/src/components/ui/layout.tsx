@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { AppShell, Burger } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { AppShell, Burger } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 
-function Layout({children}) {
+function Layout({ children, logo, Navbar }) {
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -11,24 +11,21 @@ function Layout({children}) {
       header={{ height: 60 }}
       navbar={{
         width: 300,
-        breakpoint: 'sm',
+        breakpoint: "sm",
         collapsed: { mobile: !opened },
       }}
       padding="md"
     >
-      <AppShell.Header>
-        <Burger
-          opened={opened}
-          onClick={toggle}
-          hiddenFrom="sm"
-          size="sm"
-        />
-        <div>Logo</div>
+      <AppShell.Header bg="#eee">
+        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+        <div>{logo}</div>
       </AppShell.Header>
 
-      <AppShell.Navbar p="md">Navbar</AppShell.Navbar>
+      <AppShell.Navbar p="md" bg="#eee">
+        <Navbar />
+      </AppShell.Navbar>
 
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main bg="#757575">{children}</AppShell.Main>
     </AppShell>
   );
 }
