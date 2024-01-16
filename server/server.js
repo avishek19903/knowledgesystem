@@ -1,6 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
+import bodyParser from "body-parser";
 
 
 dotenv.config();
@@ -16,6 +18,12 @@ app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors({
+  origin: "*"
+}));
 
 app.use("/api/workouts", workouts);
 app.use("/api/users", userRoutes);

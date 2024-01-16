@@ -13,13 +13,17 @@
     "@mantine/core": "^7.4.1",
     "@mantine/form": "^7.4.1",
     "@mantine/hooks": "^7.4.1",
+    "@mantine/notifications": "^7.4.1",
+    "axios": "^1.6.5",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-auth-kit": "^3.0.2-alpha.14",
     "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.21.1",
-    "sort-by": "^1.2.0"
+    "sort-by": "^0.0.2",
+    "tabler-icons-react": "^1.56.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

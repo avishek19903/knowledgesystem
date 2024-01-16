@@ -2,6 +2,11 @@ import React from "react";
 
 import { useToggle, upperFirst } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
+import { useMutation, useQuery } from "react-query";
+import { notifications } from "@mantine/notifications";
+// import { IconCheck, IconX } from "@tabler/icons-react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import {
   TextInput,
@@ -16,8 +21,11 @@ import {
   Stack,
   Divider,
 } from "@mantine/core";
+import { log } from "console";
 
 export default function Login(props: PaperProps) {
+  const navigate = useNavigate();
+
   const [type, toggle] = useToggle(["login", "register"]);
   const form = useForm({
     initialValues: {
@@ -30,9 +38,75 @@ export default function Login(props: PaperProps) {
     validate: {
       email: (val) => (/^\S+@\S+$/.test(val) ? null : "Invalid email"),
       password: (val) =>
-        val.length <= 6
+        val.length <= 3
           ? "Password should include at least 6 characters"
           : null,
+    },
+  });
+
+  const { mutate: login, isLoading } = useMutation({
+    mutationFn: async (data: any) => {
+      return await axios.post("http://localhost:4000/api/users/login", {
+        email: form.values.email,
+        password: form.values.password,
+      });
+    },
+    mutationKey: ["loginUser"],
+    onSuccess: (data) => {
+      notifications.show({
+        color: "green.3",
+        title: "Success",
+        message: "login sucessfully.",
+        // icon: <IconCheck />,
+      });
+
+      if (data.data.role === "client") {
+        return navigate("/dashboard/client");
+      } else if (data.data.role === "admin") {
+        return navigate("/dashboard/admin");
+      } else if (data.data.role === "staff") {
+        return navigate("/dashboard/staff");
+      } else {
+        return navigate("/dashboard/projectteam");
+      }
+    },
+    onError: (error: any) => {
+      console.log(error); 
+
+      notifications.show({
+        color: "red.3",
+        title: "Error occured",
+        message: error.response.data.message,
+        // icon: <IconX />,
+      });
+    },
+  });
+
+  const { mutate: signup, isLoading: isSignupLoading } = useMutation({
+    mutationFn: async (data: any) => {
+      return await axios.post("http://localhost:4000/api/users/signup", {
+        email: form.values.email,
+        password: form.values.password,
+        name: form.values.name,
+      });
+    },
+    mutationKey: ["registerUser"],
+    onSuccess: (data) => {
+      notifications.show({
+        color: "green.3",
+        title: "Success",
+        message: "registration sucessfully! please wait for the verification.",
+        // icon: <IconCheck />,
+      });
+      form.reset()
+    },
+    onError: (error: any) => {
+      notifications.show({
+        color: "red.3",
+        title: "Error occured",
+        message: error.message,
+        // icon: <IconX />,
+      });
     },
   });
 
@@ -50,10 +124,12 @@ export default function Login(props: PaperProps) {
       <Text size="lg" fw={500}>
         Welcome to Knowledge Management System, {type} with
       </Text>
-      
+
       <Divider label="" labelPosition="center" my="lg" />
 
-      <form onSubmit={form.onSubmit(() => {})}>
+      <form
+        onSubmit={form.onSubmit(() => (type === "login" ? login() : signup()))}
+      >
         <Stack>
           {type === "register" && (
             <TextInput

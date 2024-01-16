@@ -61,7 +61,7 @@ userSchema.statics.login = async function (email, password) {
   console.log(user);
 
   if (!user) {
-    throw Error("invalid admin");
+    throw Error("no such user found!");
   }
 
   const match = await bcrypt.compare(password, user.password);
