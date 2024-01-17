@@ -1,8 +1,4 @@
-
 import "@mantine/core/styles.css";
-
-
-
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
 
@@ -10,6 +6,7 @@ import Login from "./pages/Login";
 import ClientListing from "./pages/Admin/clientListing";
 import StaffListing from "./pages/Admin/staffListing";
 
+import SendReward from './pages/Admin/SendReward'
 import EditStaff from "./pages/Admin/editStaff";
 import EditProject from "./pages/Admin/EditProject";
 import CreateProject from "./pages/Admin/CreateProject";
@@ -43,6 +40,7 @@ function App() {
             <Route path="clients/addclient" element={<AddClient />} />
 
             <Route path="createemail" element={<CreateEmail />} />
+            <Route path="sendreward" element={<SendReward />} />
 
             <Route path="projects" element={<Projects />} />
             <Route path="projects/editproject/:id" element={<EditProject />} />

@@ -26,7 +26,7 @@ const data = [
     icon: IconPresentationAnalytics,
   },
   {
-    link: "/dashboard/admin/createemail",
+    link: "/dashboard/admin/sendreward",
     label: "Send reward",
     icon: IconAward,
   },
