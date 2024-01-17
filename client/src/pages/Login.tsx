@@ -96,6 +96,7 @@ export default function Login(props: PaperProps) {
         title: "Success",
         message: "registration sucessfully! please wait for the verification.",
         // icon: <IconCheck />,
+        
       });
       form.reset();
     },

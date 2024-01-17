@@ -4,10 +4,6 @@
   margin: 0;
 }
 
-body {
-  /* background-color: #382f2f; */
-}
-
 /* @tailwind base; */
 /* @tailwind components; */
 @tailwind utilities;

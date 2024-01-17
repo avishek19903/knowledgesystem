@@ -1,6 +1,7 @@
 import React from "react";
 
 import App from "./App";
+import '@mantine/notifications/styles.css';
 
 import ReactDOM from "react-dom/client";
 import "./index.css";
