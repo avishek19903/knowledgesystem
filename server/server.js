@@ -7,7 +7,6 @@ import bodyParser from "body-parser";
 
 dotenv.config();
 
-import workouts from "./routes/workouts.js";
 import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
@@ -25,7 +24,7 @@ app.use(cors({
   origin: "*"
 }));
 
-app.use("/api/workouts", workouts);
+
 app.use("/api/users", userRoutes);
 
 // connect to database

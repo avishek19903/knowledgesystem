@@ -19,8 +19,8 @@ const userSchema = new Schema(
       required: true,
     },
     status: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: "Not Approved",
     },
      role: {
       type: String,
@@ -30,10 +30,10 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-userSchema.statics.createUser = async function (email, password, name) {
+userSchema.statics.createUser = async function (email, password, name, role) {
 
     // validation
-    if(!email || !password || !name) {
+    if(!email || !password || !name ) {
         throw Error("fillup email, password and name")
     }
 
@@ -46,7 +46,7 @@ userSchema.statics.createUser = async function (email, password, name) {
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-    const user = await this.create({email, password: hash, name})
+    const user = await this.create({email, password: hash, name, role})
 
     return user
 }

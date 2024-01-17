@@ -63,7 +63,7 @@ export default function Login(props: PaperProps) {
       if (data.data.role === "client") {
         return navigate("/dashboard/client");
       } else if (data.data.role === "admin") {
-        return navigate("/dashboard/admin");
+        return navigate("/dashboard/admin/staffs");
       } else if (data.data.role === "staff") {
         return navigate("/dashboard/staff");
       } else {

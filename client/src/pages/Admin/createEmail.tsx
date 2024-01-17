@@ -1,51 +1,49 @@
-import React from 'react';
+import React from "react";
 
-import { TextInput, Textarea, SimpleGrid, Group, Title, Button } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import {
+  TextInput,
+  Textarea,
+  SimpleGrid,
+  Group,
+  Title,
+  Button,
+  Select,
+} from "@mantine/core";
+import { useForm } from "@mantine/form";
 
 export default function GetInTouchSimple() {
   const form = useForm({
     initialValues: {
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
+      subject: "",
+      message: "",
+      role: "",
     },
     validate: {
-      name: (value) => value.trim().length < 2,
-      email: (value) => !/^\S+@\S+$/.test(value),
       subject: (value) => value.trim().length === 0,
+      message: (value) => value.trim().length === 0,
+      role: (value) => value.trim().length === 0,
     },
   });
 
   return (
-    <form onSubmit={form.onSubmit(() => {})}>
+    <form onSubmit={form.onSubmit(() => {})} className="text-white">
       <Title
         order={2}
         size="h1"
-        style={{ fontFamily: 'Greycliff CF, var(--mantine-font-family)' }}
+        style={{ fontFamily: "Greycliff CF, var(--mantine-font-family)" }}
         fw={900}
         ta="center"
       >
         Create Email
       </Title>
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }} mt="xl">
-        <TextInput
-          label="Name"
-          placeholder="Your name"
-          name="name"
-          variant="filled"
-          {...form.getInputProps('name')}
-        />
-        <TextInput
-          label="Email"
-          placeholder="Your email"
-          name="email"
-          variant="filled"
-          {...form.getInputProps('email')}
-        />
-      </SimpleGrid>
+      <Select
+        label="Select role"
+        placeholder="Pick Role"
+        data={["client", "staff"]}
+        defaultValue="React"
+        clearable
+      />
 
       <TextInput
         label="Subject"
@@ -53,7 +51,7 @@ export default function GetInTouchSimple() {
         mt="md"
         name="subject"
         variant="filled"
-        {...form.getInputProps('subject')}
+        {...form.getInputProps("subject")}
       />
       <Textarea
         mt="md"
@@ -64,7 +62,7 @@ export default function GetInTouchSimple() {
         autosize
         name="message"
         variant="filled"
-        {...form.getInputProps('message')}
+        {...form.getInputProps("message")}
       />
 
       <Group justify="center" mt="xl">

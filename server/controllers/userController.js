@@ -8,10 +8,10 @@ const creatoken = (_id) => {
 };
 
 const createUser = async (req, res) => {
-  const { email, password, name } = req.body;
+  const { email, password, name, role } = req.body;
 
   try {
-    const user = await userModel.createUser(email, password, name);
+    const user = await userModel.createUser(email, password, name, role);
     const token = creatoken(user._id);
     res.status(201).json({ token, user });
   } catch (err) {
@@ -39,6 +39,12 @@ const getAlluser = async (req, res) => {
   res.status(200).json(users);
 };
 
+const getOneUser = async (req, res) => {
+  const { id } = req.params
+  const user = await userModel.findOne({ _id: id});
+  res.status(200).json(user);
+}
+
 const updateUser = async (req, res) => {
   const data = req?.body;
 
@@ -49,7 +55,7 @@ const updateUser = async (req, res) => {
     // const hash = await bcrypt.hash(data?.password, salt);
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ message: "cannot update status" });
+      return res.status(400).json({ message: "cannot update user" });
     }
 
     const updatedUser = await userModel.updateOne(
@@ -85,4 +91,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-export { createUser, loginUser, getAlluser, updateUser, deleteUser };
+export { createUser, loginUser, getAlluser, updateUser, deleteUser, getOneUser };
