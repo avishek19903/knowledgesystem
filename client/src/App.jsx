@@ -1,7 +1,7 @@
 
 import "@mantine/core/styles.css";
-import { MantineProvider } from "@mantine/core";
-import { Notifications } from "@mantine/notifications";
+
+
 
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
@@ -27,9 +27,9 @@ function App() {
   const queryClient = new QueryClient();
 
   return (
-    <MantineProvider>
-      <Notifications />
+    
       <QueryClientProvider client={queryClient}>
+      
         <Routes>
           <Route path="/" element={<Login />} />
 
@@ -62,7 +62,7 @@ function App() {
           />
         </Routes>
       </QueryClientProvider>
-    </MantineProvider>
+    
   );
 }
 
